@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #chat {
+            width: 500px;
+            max-width: 100%;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        #messages {
+            border-bottom: 2px solid #eeeeee;
+            padding: 20px;
+            height: 300px;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #fafafa;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        #input {
+            border: none;
+            padding: 10px;
+            border-top: 1px solid #eeeeee;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            font-size: 16px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .message {
+            max-width: 80%;
+            padding: 10px;
+            border-radius: 15px;
+            word-wrap: break-word;
+        }
+        .user {
+            background: #d1e7ff;
+            color: #000;
+            align-self: flex-end;
+        }
+        .bot {
+            background: #e2f1e8;
+            color: #000;
+            align-self: flex-start;
+        }
+        #input:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="chat">
+        <div id="messages"></div>
+        <input type="text" id="input" placeholder="Type your message...">
+    </div>
+    <script>
+        const input = document.getElementById('input');
+        const messages = document.getElementById('messages');
+
+        input.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const userMessage = input.value;
+                if (userMessage.trim() === '') return; // Prevent empty messages
+                
+                // Add user message to chat
+                messages.innerHTML += `<div class="message user">${userMessage}</div>`;
+                input.value = '';
+
+                // Scroll to the bottom of the chat
+                messages.scrollTop = messages.scrollHeight;
+
+                // Send message to server
+                fetch('http://localhost:5000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: userMessage })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Add bot response to chat
+                    messages.innerHTML += `<div class="message bot">${data.response}</div>`;
+                    // Scroll to the bottom of the chat
+                    messages.scrollTop = messages.scrollHeight;
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
+    </script>
+</body>
+</html>

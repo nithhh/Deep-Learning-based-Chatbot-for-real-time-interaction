@@ -1,0 +1,52 @@
+{
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": ["Hi there", "How are you", "Is anyone there?", "Hey", "Hola", "Hello", "Good day"],
+            "responses": ["Hello!", "Good to see you again.", "Hi there, how can I assist you today?"],
+            "context": [""]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting with you, bye", "Till next time"],
+            "responses": ["See you later!", "Have a great day!", "Goodbye! Come back anytime."],
+            "context": [""]
+        },
+        {
+            "tag": "thanks",
+            "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for your help"],
+            "responses": ["You're welcome!", "My pleasure!", "Happy to help!"],
+            "context": [""]
+        },
+        {
+            "tag": "query",
+            "patterns": ["What is your name?", "Who are you?", "Can you tell me about yourself?"],
+            "responses": ["I am a chatbot designed to assist you. How can I help?"],
+            "context": [""]
+        },
+        {
+            "tag": "joke",
+            "patterns": ["Tell me a joke", "I need a laugh", "Make me smile"],
+            "responses": ["Why don't scientists trust atoms? Because they make up everything!", "Why did the scarecrow win an award? Because he was outstanding in his field!"],
+            "context": [""]
+        },
+        {
+            "tag": "weather",
+            "patterns": ["What's the weather like today?", "Do you know the weather forecast?", "How's the weather?"],
+            "responses": ["I can't check the weather, but you can check a weather website or app for the latest forecast."],
+            "context": [""]
+        },
+        {
+            "tag": "news",
+            "patterns": ["What's the latest news?", "Tell me the news", "Any recent news?"],
+            "responses": ["I don't have access to current news, but you can check news websites or apps for updates."],
+            "context": [""]
+        },
+        {
+            "tag": "support",
+            "patterns": ["I need help", "Can you assist me?", "I have a problem"],
+            "responses": ["Sure, I'm here to help! Please describe your issue in detail so I can assist you."],
+            "context": [""]
+        }
+    ]
+}
